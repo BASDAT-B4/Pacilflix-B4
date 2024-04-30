@@ -1,0 +1,11 @@
+<h1>Pacilflix B4</h1>
+
+{% extends 'base.html' %}
+
+{% block content %}
+<a href="{% url 'authentication:logout' %}">
+    <button>
+        Logout
+    </button>
+</a>
+{% endblock content %}
