@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pacilflix - Trailer</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #000;
+        color: #fff;
+        }
+        header {
+            background-color: #333;
+            padding: 20px;
+            background-color: #b20710;
+        color: #fff;
+        }
+
+        .search-bar {
+            max-width: 600px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .search-bar input[type="text"] {
+            width: 70%;
+            padding: 10px;
+            border: none;
+            border-radius: 20px;
+            outline: none;
+        }
+
+        .search-bar button {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 20px;
+            background-color: #333; 
+            color: white;
+            cursor: pointer;
+        }
+
+        .section {
+            padding: 20px;
+        }
+
+        .section h2 {
+            margin-bottom: 10px;
+        }
+        /* .img {
+            max-width: 250px;
+            max-height: 2500px;
+        } */
+        .ranking {
+        position: absolute; /* Membuat nomor peringkat berada di atas gambar */
+        top: 10px; /* Mengatur jarak dari atas */
+        right: 10px; /* Mengatur jarak dari kanan */
+        font-size: 24px; /* Mengatur ukuran font */
+        color: #fff; /* Warna font */
+        background-color: rgba(0, 0, 0, 0.7); /* Warna latar belakang */
+        padding: 5px 10px; /* Padding untuk memberikan ruang di sekitar teks */
+        border-radius: 5px; /* Mengatur sudut border */
+        z-index: 1; /* Menempatkan nomor peringkat di atas gambar */
+    }
+
+        .movie-container {
+        display: flex;
+        overflow-x: auto;
+        flex-wrap: nowrap; /* Tambahkan properti flex-wrap */
+        }
+
+        .movie {
+            margin-right: 20px;
+            min-width: 320px; /* Tentukan lebar minimum untuk setiap kartu */
+            max-width: 320px;
+            /* max-height: 320px; */
+            text-align: center;
+            cursor: pointer; /* Menambahkan cursor pointer untuk menandai bahwa item bisa diklik */
+            position: relative; 
+            
+        }
+
+        .movie img {
+            width: 150px;
+            min-width: 300px;
+            height: auto;
+            border-radius: 10px;
+        }
+
+        .movie-title {
+            margin-top: 5px;
+        }
+        .modal-content {
+        color: #fff;
+        background-color: #000; /* Mengubah latar belakang modal menjadi hitam */
+    }
+
+    /* Tambahkan kode ini untuk mengubah warna teks pada tombol Close */
+    .modal-footer .btn-secondary {
+        color: #fff;
+    }
+    .watch-button {
+        display: block; /* Membuat tombol menjadi blok sehingga akan ada di bawah judul */
+        margin-top: 10px; /* Memberikan jarak antara judul dan tombol */
+        background-color: #b20710; /* Warna latar belakang tombol */
+        color: #fff; /* Warna teks tombol */
+        border: none; /* Menghapus border tombol */
+        padding: 10px 20px; /* Padding untuk memberikan ruang di sekitar teks */
+        border-radius: 5px; /* Mengatur sudut border */
+        text-align: center; /* Pusatkan teks di dalam tombol */
+        text-decoration: none; /* Menghapus dekorasi teks */
+    }
+
+    </style>
+</head>
+<body>
+    <header style="background-color: #b20710; color: #fff; padding: 20px; text-align: center;">
+        <h1>DAFTAR TAYANGAN</h1>
+    </header>
+    <header style="background-color: #333;">
+        <div class="search-bar">
+            <input type="text" placeholder="Search...">
+            <button type="submit">Search</button>
+        </div>
+    </header>
+
+    <section class="section top-10">
+        <h2 class="mb-4">Result for "Tayangan 1"</h2>
+    <div class="mb-3">
+        <button type="button" class="btn btn-danger mr-2">Opsi Top 10 Global (default)</button>
+        <button type="button" class="btn btn-danger">Opsi Top 10 Negara Pengguna</button>
+    </div>
+        <div class="movie-container" style="overflow-x: auto;">
+          <!-- Start of backend rendering -->
+          <!-- Paste the following movie divs as needed -->
+            <div class="movie" data-toggle="modal" data-target="#movieModal" data-poster="https://i.pinimg.com/originals/d8/90/4f/d8904f3ecb362fb886e4f539a7be8e82.jpg" data-title="Tayangan 1" data-synopsis="Synopsis of Tayangan 1" data-trailer-url="https://www.youtube.com/watch?v=dQw4w9WgXcQ" data-release-date="Release Date 1" style="margin-right: 20px;">
+                <!-- <span class="ranking">1</span> -->
+                <img src="https://i.pinimg.com/originals/d8/90/4f/d8904f3ecb362fb886e4f539a7be8e82.jpg" alt="Movie 1" style="width: 300px;" >
+                <p class="movie-title">Tayangan 1</p>
+                <a href="#" class="watch-button">Menonton</a>
+            </div>
+            
+          <!-- Paste the above movie divs 9 more times -->
+      </div>
+  </section>
+
+
+    <!-- Modal -->
+    <div class="modal fade" id="movieModal" tabindex="-1" role="dialog" aria-labelledby="movieModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="movieModalLabel">Movie Details</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <img src="" alt="Movie Poster" id="modalPoster" style="width: 100%;">
+                    <h5 id="modalTitle"></h5>
+                    <p id="modalSynopsis"></p>
+                    <p><strong>Trailer URL:</strong> <a id="modalTrailerUrl" href="" target="_blank"></a></p>
+                    <p><strong>Release Date:</strong> <span id="modalReleaseDate"></span></p>
+                    <!-- <p class="total-views" style="display: none;"><strong>Total Views (Last 7 Days):</strong> <span id="modalTotalViews"></span></p> -->
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+    <script>
+        // Script untuk menampilkan detail film pada modal
+        $('.movie').click(function() {
+            var poster = $(this).data('poster');
+            var title = $(this).data('title');
+            var synopsis = $(this).data('synopsis');
+            var trailerUrl = $(this).data('trailer-url');
+            var releaseDate = $(this).data('release-date');
+            var totalViews = $(this).data('total-views');
+            
+            // Memasukkan data ke dalam modal
+            $('#modalPoster').attr('src', poster);
+            $('#modalTitle').text(title);
+            $('#modalSynopsis').text(synopsis);
+            $('#modalTrailerUrl').text(trailerUrl);
+            $('#modalTrailerUrl').attr('href', trailerUrl);
+            $('#modalReleaseDate').text(releaseDate);
+            
+            // Menampilkan total views hanya jika datanya tersedia
+            if (totalViews) {
+                $('.total-views').show();
+                $('#modalTotalViews').text(totalViews);
+            } else {
+                $('.total-views').hide();
+            }
+        });
+    </script>
+</body>
+</html>
