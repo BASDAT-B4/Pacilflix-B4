@@ -1,0 +1,71 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #191919;
+    color: white;
+    margin: 0;
+    padding: 0;
+}
+
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+    background-color: #000000;
+}
+
+.navbar .logo {
+    font-size: 24px;
+    font-weight: bold;
+    color: #E50914; /* Warna merah untuk PACILFLIX */
+}
+
+.navbar .menu a {
+    color: white;
+    text-decoration: none;
+    margin-left: 20px;
+}
+
+.content {
+    padding: 20px;
+    text-align: center;
+}
+
+h1 {
+    color: white; /* Warna putih untuk Daftar Kontributor */
+}
+
+table {
+    width: 100%;
+    margin-top: 20px;
+    border-collapse: collapse;
+}
+
+table, th, td {
+    border: 1px solid #444;
+}
+
+th, td {
+    padding: 10px;
+    text-align: left;
+}
+
+/* Penyesuaian untuk baris pertama tabel */
+th {
+    text-align: center;
+}
+
+.filter {
+    margin: 20px 0;
+}
+
+.filter label {
+    color: #aaa;
+}
+
+.filter select {
+    padding: 5px;
+    background: #333;
+    color: white;
+    border: none;
+}
