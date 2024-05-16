@@ -15,16 +15,9 @@ def connectdb(func):
     return wrapper
 
 @connectdb
-def random(cursor: CursorWrapper, request):
-    cursor.execute("SELECT * FROM pacilflix.pengguna")
-    pengguna = cursor.fetchall()
-    print(pengguna)
-    return HttpResponse(status = 200)
-
-@connectdb
 def show_daftar_kontributor(request, cursor, tipe='all'):
     if tipe.lower() == 'all':
-        cursor.execute(ContributorManager.retrieve_all_contributors())
+        cursor.execute(ContributorManager.get_all_contributors())
     elif tipe.lower() == 'sutradara':
         cursor.execute(ContributorManager.filter_by_sutradara())
     elif tipe.lower() == 'pemain':
@@ -33,7 +26,6 @@ def show_daftar_kontributor(request, cursor, tipe='all'):
         cursor.execute(ContributorManager.filter_by_penulis_skenario())
     
     contributors = EncodeHelper.toSQL(cursor)
-    print(contributors)
     
     for contributor in contributors:
         contributor['jenis_kelamin'] = 'Laki-laki' if contributor['jenis_kelamin'] == 0 else 'Perempuan'

@@ -81,7 +81,7 @@ th {
 <div class="navbar">
     <div class="logo">PACILFLIX</div>
     <div class="menu">
-        <a href="#trailers">Lihat Trailer</a>
+        <a href="#trailer">Lihat Trailer</a>
         <a href="#logout">Logout</a>
     </div>
 </div>
@@ -90,11 +90,12 @@ th {
     <div class="filter">
         <label for="contributorType">Filter by type:</label>
         <select id="contributorType">
-            <option value="all">All</option>
-            <option value="penulis skenario">Penulis Skenario</option>
-            <option value="pemain">Pemain</option>
-            <option value="sutradara">Sutradara</option>
+            <option value="all" {% if param == 'all' %}selected{% endif %}>All</option>
+            <option value="penulis skenario" {% if param == 'penulis skenario' %}selected{% endif %}>Penulis Skenario</option>
+            <option value="pemain" {% if param == 'pemain' %}selected{% endif %}>Pemain</option>
+            <option value="sutradara" {% if param == 'sutradara' %}selected{% endif %}>Sutradara</option>
         </select>
+        
     </div>
     <table class="contributors">
         <thead>
@@ -121,11 +122,7 @@ th {
 <script>
     document.getElementById('contributorType').addEventListener('change', function() {
         var tipe = this.value;
-        if (tipe === 'all') {
-            window.location.href = "{% url 'daftar_kontributor:daftar_kontributor' %}";
-        } else {
-            window.location.href = "{% url 'daftar_kontributor:daftar_kontributor_filtered' 'tipe' %}".replace('tipe', tipe);
-        }
+        window.location.href = "{% url 'daftar_kontributor:daftar_kontributor_filtered' 'tipe' %}".replace('tipe', tipe);
     });
 </script>
 {% endblock content %}
