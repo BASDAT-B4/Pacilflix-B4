@@ -3,7 +3,7 @@ from authentication.views import show_main, register
 from django.contrib.auth import authenticate, login
 from authentication.views import login_user 
 from django.contrib.auth import logout
-from authentication.views import logout_user
+from authentication.views import logout_user, home
 
 app_name = 'authentication'
 
@@ -12,4 +12,5 @@ urlpatterns = [
     path('register/', register, name='register'),
     path('login/', login_user, name='login'),
     path('logout/', logout_user, name='logout'),
+    path('home/', home, name='home'),
 ]

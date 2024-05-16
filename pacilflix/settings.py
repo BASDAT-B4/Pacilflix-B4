@@ -43,6 +43,9 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     # application goes here:
     'daftar_kontributor',
+    'main',
+    'authentication',
+    'trailer'
 ]
 
 MIDDLEWARE = [
