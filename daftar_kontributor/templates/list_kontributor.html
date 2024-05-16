@@ -90,10 +90,10 @@ th {
     <div class="filter">
         <label for="contributorType">Filter by type:</label>
         <select id="contributorType">
-            <option value="all">All</option>
-            <option value="director">Penulis Skenario</option>
-            <option value="actor">Pemain</option>
-            <option value="writer">Sutradara</option>
+            <option value="all"><a href="{% url 'daftar_kontributor:daftar_kontributor' %}">All</a></option>
+            <option value="director"><a href="{% url 'daftar_kontributor:daftar_kontributor_filtered' 'penulis_skenario' %}">Penulis Skenario</a></option>
+            <option value="actor"><a href="{% url 'daftar_kontributor:daftar_kontributor_filtered' 'pemain' %}">Pemain</a></option>
+            <option value="writer"><a href="{% url 'daftar_kontributor:daftar_kontributor_filtered' 'sutradara' %}">Sutradara</a></option>
         </select>
     </div>
     <table class="contributors">
@@ -116,6 +116,5 @@ th {
             {% endfor %}
         </tbody>
     </table>
-    <a href="{% url 'list_kontributor:random' %}">Tes Random</a>
 </div>
 {% endblock content %}
