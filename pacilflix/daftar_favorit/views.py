@@ -14,14 +14,4 @@ def show_main(request):
         'products': data
     }
 
-    return render(request, "main.html", context)
-
-def create_product(request):
-    form = data_daftar_favorit(request.POST or None)
-
-    if form.is_valid() and request.method == "POST":
-        form.save()
-        return HttpResponseRedirect(reverse('daftar_favorit:show_main'))
-
-    context = {'form': form}
-    return render(request, "create_product.html", context)
+    return render(request, "daftar_favorit.html", context)
