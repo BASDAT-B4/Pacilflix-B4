@@ -65,7 +65,8 @@
 <body>
     <div class="login">
         <h1>Form Registrasi</h1>  
-        <form method="POST" action="home.html"> <!-- Changed action to home.html -->
+        <form method="POST"> 
+            {% csrf_token %}
             <table>
                 <tr>
                     <td><label for="username">Username:</label></td>
@@ -76,8 +77,8 @@
                     <td><input type="password" id="password" name="password" required></td>
                 </tr>
                 <tr>
-                    <td><label for="country">Negara Asal:</label></td>
-                    <td><input type="text" id="country" name="country" required></td>
+                    <td><label for="negara">Negara Asal:</label></td>
+                    <td><input type="text" id="negara" name="negara" required></td>
                 </tr>
                 <tr>
                     <td></td>
@@ -85,6 +86,15 @@
                 </tr>
             </table>
         </form>
+
+        {% if messages %}
+    <ul class="text-red-500">
+      {% for message in messages %}
+      <li>{{ message }}</li>
+      {% endfor %}
+    </ul>
+    {% endif %}
+
     </div>
 </body>
-</html>
+</html> 
