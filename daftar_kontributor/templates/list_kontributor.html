@@ -90,10 +90,10 @@ th {
     <div class="filter">
         <label for="contributorType">Filter by type:</label>
         <select id="contributorType">
-            <option value="all"><a href="{% url 'daftar_kontributor:daftar_kontributor' %}">All</a></option>
-            <option value="director"><a href="{% url 'daftar_kontributor:daftar_kontributor_filtered' 'penulis_skenario' %}">Penulis Skenario</a></option>
-            <option value="actor"><a href="{% url 'daftar_kontributor:daftar_kontributor_filtered' 'pemain' %}">Pemain</a></option>
-            <option value="writer"><a href="{% url 'daftar_kontributor:daftar_kontributor_filtered' 'sutradara' %}">Sutradara</a></option>
+            <option value="all">All</option>
+            <option value="penulis skenario">Penulis Skenario</option>
+            <option value="pemain">Pemain</option>
+            <option value="sutradara">Sutradara</option>
         </select>
     </div>
     <table class="contributors">
@@ -117,4 +117,15 @@ th {
         </tbody>
     </table>
 </div>
+
+<script>
+    document.getElementById('contributorType').addEventListener('change', function() {
+        var tipe = this.value;
+        if (tipe === 'all') {
+            window.location.href = "{% url 'daftar_kontributor:daftar_kontributor' %}";
+        } else {
+            window.location.href = "{% url 'daftar_kontributor:daftar_kontributor_filtered' 'tipe' %}".replace('tipe', tipe);
+        }
+    });
+</script>
 {% endblock content %}
