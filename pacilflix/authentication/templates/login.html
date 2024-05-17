@@ -1,45 +1,25 @@
-{% extends 'base.html' %}
-
-{% block meta %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login</title>
-{% endblock meta %}
-
-{% block content %}
-
-<div class = "login">
-
-    <h1>Login</h1>
-
-    <form method="POST" action="">
-        {% csrf_token %}
-        <table>
-            <tr>
-                <td>Username: </td>
-                <td><input type="text" name="username" placeholder="Username" class="form-control"></td>
-            </tr>
-                    
-            <tr>
-                <td>Password: </td>
-                <td><input type="password" name="password" placeholder="Password" class="form-control"></td>
-            </tr>
-
-            <tr>
-                <td></td>
-                <td><input class="btn login_btn" type="submit" value="Login"></td>
-            </tr>
-        </table>
-    </form>
-
-    {% if messages %}
-        <ul>
-            {% for message in messages %}
-                <li>{{ message }}</li>
-            {% endfor %}
-        </ul>
-    {% endif %}     
-        
-    Don't have an account yet? <a href="{% url 'authentication:register' %}">Register Now</a>
-
-</div>
-
-{% endblock content %}
+</head>
+<body style="background-color: black; color: white; font-family: Arial, sans-serif; margin: 0; padding: 0;">
+    <div style="max-width: 400px; margin: 100px auto; padding: 20px; background-color: rgba(0, 0, 0, 0.8); border-radius: 8px; box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);">
+        <h2 style="text-align: center;">Login</h2>
+        <form method="POST"> 
+            {% csrf_token %}
+            <div style="margin-bottom: 20px;">
+                <label for="username" style="display: block; margin-bottom: 5px;">Username:</label>
+                <input type="text" id="username" name="username" placeholder="Enter your username" style="width: 100%; padding: 8px; border: 1px solid #ccc; border-radius: 4px; background-color: #333; color: white;">
+            </div>
+            <div style="margin-bottom: 20px;">
+                <label for="password" style="display: block; margin-bottom: 5px;">Password:</label>
+                <input type="password" id="password" name="password" placeholder="Enter your password" style="width: 100%; padding: 8px; border: 1px solid #ccc; border-radius: 4px; background-color: #333; color: white;">
+            </div>
+            <button type="submit" style="width: 100%; padding: 10px; background-color: red; color: white; border: none; border-radius: 4px; cursor: pointer; transition: background-color 0.3s ease;">Login</button>
+        </form>
+    </div>
+</body>
+</html>

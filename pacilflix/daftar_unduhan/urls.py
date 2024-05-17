@@ -1,8 +1,9 @@
 from django.urls import path
-from daftar_unduhan.views import show_main
+from daftar_unduhan.views import *
 
 app_name = 'daftar_unduhan'
 
 urlpatterns = [
-    path('', show_main, name='show_daftar_unduhan'),
+    path('', show_daftar_unduhan, name='show_daftar_unduhan'),
+    path('hapus_unduhan/', hapus_unduhan, name='hapus_unduhan'),
 ]

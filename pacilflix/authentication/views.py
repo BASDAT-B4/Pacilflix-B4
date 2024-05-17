@@ -4,44 +4,77 @@ from django.contrib.auth.forms import UserCreationForm
 from django.contrib import messages  
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
+from django.db import connection
+from django.http import HttpResponse, HttpResponseRedirect
+from django.shortcuts import render
+from django.db.backends.utils import CursorWrapper
+from .queries import AuthenticationManager
+
+from django.urls import reverse
+
+import datetime
 
 
-@login_required(login_url='/login')
+
+def connectdb(func):
+    def wrapper(request):
+        with connection.cursor() as cursor:
+            return func(cursor, request)
+    return wrapper
+
+
 def show_main(request):
-    context = {
-        
-    }
+    return render(request, "home.html")
 
-    return render(request, "main.html", context)
-
-
-def register(request):
-    form = UserCreationForm()
-
+@connectdb
+def register(sql: CursorWrapper, request):
     if request.method == "POST":
-        form = UserCreationForm(request.POST)
-        if form.is_valid():
-            form.save()
+        username = request.POST.get('username')
+        password = request.POST.get('password')
+        negara = request.POST.get('negara')
+
+        with connection.cursor() as sql:
+            sql.execute(AuthenticationManager.check_username(username), [username])
+            existing_users = sql.fetchall()
+
+            if existing_users:
+                messages.error(request, "The username you chose is already in use.")
+                return render(request, 'register.html', {'form': request.POST})
+
+            if len(password) < 8:
+                messages.error(request, "Password must be at least 8 characters long.")
+                return render(request, 'register.html', {'form': request.POST})
+
+            sql.execute(AuthenticationManager.insert_user(), [username, password, negara])
             messages.success(request, 'Your account has been successfully created!')
-            return redirect('main:login')
-    context = {'form':form}
-    return render(request, 'register.html', context)
+            return redirect('authentication:login')
 
+    return render(request, 'register.html')
 
-def login_user(request):
+@connectdb
+def login_user(cursor: CursorWrapper, request):
     if request.method == 'POST':
         username = request.POST.get('username')
         password = request.POST.get('password')
-        user = authenticate(request, username=username, password=password)
-        if user is not None:
-            login(request, user)
-            return redirect('main:show_main')
+
+        # Use the method from AuthenticationManager to get the SQL query
+        cursor.execute(AuthenticationManager.check_user(), [username, password])
+        users = cursor.fetchall()
+
+        if users:
+            request.session['username'] = username
+            response = redirect('langganan:kelola_langganan')
+            response.set_cookie('last_login', str(datetime.datetime.now()))
+            return response
         else:
             messages.info(request, 'Sorry, incorrect username or password. Please try again.')
-    context = {}
-    return render(request, 'login.html', context)
 
+    return render(request, 'login.html')
 
 def logout_user(request):
     logout(request)
-    return redirect('main:login')
+    return redirect('authentication:login_user')
+
+
+def home(request):
+    return render(request, "tayangan.html")

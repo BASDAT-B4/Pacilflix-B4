@@ -1,0 +1,126 @@
+{% extends 'base.html' %}
+
+{% block meta %}
+<style>
+body {
+    font-family: Arial, sans-serif;
+    background-color: #191919;
+    color: white;
+    margin: 0;
+    padding: 0;
+}
+
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+    background-color: #000000;
+}
+
+.navbar .logo {
+    font-size: 24px;
+    font-weight: bold;
+    color: #E50914;
+}
+
+.navbar .menu a {
+    color: white;
+    text-decoration: none;
+    margin-left: 20px;
+}
+
+.content {
+    padding: 20px;
+    text-align: center;
+}
+
+h1 {
+    color: white;
+}
+
+table {
+    width: 100%;
+    margin-top: 20px;
+    border-collapse: collapse;
+}
+
+table, th, td {
+    border: 1px solid #444;
+}
+
+th, td {
+    padding: 10px;
+    text-align: left;
+}
+
+th {
+    text-align: center;
+}
+
+.filter {
+    margin: 20px 0;
+}
+
+.filter label {
+    color: #aaa;
+}
+
+.filter select {
+    padding: 5px;
+    background: #333;
+    color: white;
+    border: none;
+}
+</style>
+{% endblock meta %}
+
+{% block content %}
+<div class="navbar">
+    <div class="logo">PACILFLIX</div>
+    <div class="menu">
+        <a href="#trailer">Lihat Trailer</a>
+        <a href="#logout">Logout</a>
+    </div>
+</div>
+<div class="content">
+    <h1>Daftar Kontributor</h1>
+    <div class="filter">
+        <label for="contributorType">Filter by type:</label>
+        <select id="contributorType">
+            <option value="all" {% if param == 'all' %}selected{% endif %}>All</option>
+            <option value="penulis skenario" {% if param == 'penulis skenario' %}selected{% endif %}>Penulis Skenario</option>
+            <option value="pemain" {% if param == 'pemain' %}selected{% endif %}>Pemain</option>
+            <option value="sutradara" {% if param == 'sutradara' %}selected{% endif %}>Sutradara</option>
+        </select>
+        
+    </div>
+    <table class="contributors">
+        <thead>
+            <tr>
+                <th>Nama</th>
+                <th>Tipe</th>
+                <th>Jenis Kelamin</th>
+                <th>Kewarganegaraan</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for contributor in contributors %}
+            <tr>
+                <td>{{ contributor.nama }}</td>
+                <td>{{ contributor.tipe }}</td>
+                <td>{{ contributor.jenis_kelamin }}</td>
+                <td>{{ contributor.kewarganegaraan }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+<script>
+    document.getElementById('contributorType').addEventListener('change', function() {
+        var tipe = this.value;
+        window.location.href = "{% url 'daftar_kontributor:daftar_kontributor_filtered' 'tipe' %}".replace('tipe', tipe);
+    });
+</script>
+{% endblock content %}

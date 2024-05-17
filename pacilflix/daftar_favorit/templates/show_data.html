@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Show Data</title>
+</head>
+<body>
+    <h1>Data dari tabel daftar_favorit:</h1>
+    <ul>
+        {% for row in daftar_favorit %}
+            <li>{{ row }}</li>
+        {% endfor %}
+    </ul>
+
+    <h1>Data dari tabel daftar_unduhan:</h1>
+    <ul>
+        {% for row in daftar_unduhan %}
+            <li>{{ row }}</li>
+        {% endfor %}
+    </ul>
+</body>
+</html>

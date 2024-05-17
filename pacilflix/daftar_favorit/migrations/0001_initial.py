@@ -17,7 +17,7 @@ class Migration(migrations.Migration):
                 ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
                 ('username', models.CharField(max_length=255)),
                 ('timestamp', models.DateField(auto_now_add=True)),
-                ('judul', models.TextField()),
+                ('id_tayangan', models.TextField()),
             ],
         ),
     ]

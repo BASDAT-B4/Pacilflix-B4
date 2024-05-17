@@ -1,0 +1,164 @@
+{% extends 'base.html' %}
+
+{% block meta %}
+<style>
+body {
+    font-family: Arial, sans-serif;
+    background-color: #191919;
+    color: white;
+    margin: 0;
+    padding: 0;
+}
+
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+    background-color: #000000;
+}
+
+.navbar .logo {
+    font-size: 24px;
+    font-weight: bold;
+    color: #E50914;
+}
+
+.navbar .menu a {
+    color: white;
+    text-decoration: none;
+    margin-left: 20px;
+}
+
+.content {
+    padding: 20px;
+}
+
+h1, h2 {
+    color: white;
+    text-align: left;
+    padding-left: 10px;
+}
+
+.section {
+    margin-top: 20px;
+    padding: 10px;
+}
+
+table {
+    width: 100%;
+    margin-top: 20px;
+    border-collapse: collapse;
+}
+
+table, th, td {
+    border: 1px solid #444;
+    padding: 10px;
+    text-align: left;
+}
+
+th {
+    text-align: center;
+}
+
+button {
+    padding: 10px;
+    background-color: #E50914;
+    border: none;
+    color: white;
+    cursor: pointer;
+}
+</style>
+{% endblock meta %}
+
+{% block content %}
+<div class="navbar">
+    <div class="logo">PACILFLIX</div>
+    <div class="menu">
+        <a href="#trailers">Lihat Trailer</a>
+        <a href="#logout">Logout</a>
+    </div>
+</div>
+<div class="content">
+    <h1 style="text-align: center;">Kelola Langganan</h1>
+    <div class="section">
+        <h2>Paket Langganan Aktif Anda:</h2>
+        <table class="subscriptions">
+            <thead>
+                <tr>
+                    <th>Nama</th>
+                    <th>Harga</th>
+                    <th>Resolusi Layar</th>
+                    <th>Dukungan Perangkat</th>
+                    <th>Tanggal Dimulai</th>
+                    <th>Tanggal Akhir</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for paket_langganan in paket_langganan_aktif %}
+                <tr>
+                    <td>{{ paket_langganan.nama }}</td>
+                    <td>{{ paket_langganan.harga }}</td>
+                    <td>{{ paket_langganan.resolusi_layar }}</td>
+                    <td>{{ paket_langganan.dukungan_perangkat }}</td>
+                    <td>{{ paket_langganan.start_date_time }}</td>
+                    <td>{{ paket_langganan.end_date_time }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    <div class="section">
+        <h2>Pilih Paket Lain:</h2>
+        <table class="packages">
+            <thead>
+                <tr>
+                    <th>Nama</th>
+                    <th>Harga</th>
+                    <th>Resolusi Layar</th>
+                    <th>Dukungan Perangkat</th>
+                    <th>Aksi</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for paket in daftar_paket %}
+                <tr>
+                    <td>{{ paket.nama }}</td>
+                    <td>{{ paket.harga }}</td>
+                    <td>{{ paket.resolusi_layar }}</td>
+                    <td>{{ paket.dukungan_perangkat }}</td>
+                    <td style="text-align: center;"><button>Beli</button></td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    <div class="section">
+        <h2>Riwayat Transaksi:</h2>
+        <table class="transactions">
+            <thead>
+                <tr>
+                    <th>Nama Paket</th>
+                    <th>Tanggal Dimulai</th>
+                    <th>Tanggal Akhir</th>
+                    <th>Metode Pembayaran</th>
+                    <th>Tanggal Pembayaran</th>
+                    <th>Total Pembayaran</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for transaksi in riwayat_transaksi %}
+                <tr>
+                    <td>{{ transaksi.nama }}</td>
+                    <td>{{ transaksi.start_date_time }}</td>
+                    <td>{{ transaksi.end_date_time }}</td>
+                    <td>{{ transaksi.metode_pembayaran }}</td>
+                    <td>{{ transaksi.timestamp_pembayaran }}</td>
+                    <td>{{ transaksi.total_pembayaran }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock content %}
