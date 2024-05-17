@@ -1,45 +1,127 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PacilFlix - Pembelian Paket</title>
-    <link rel="stylesheet" href="beli_paket.css">
-</head>
-<body>
-    <div class="navbar">
-        <div class="logo">PACILFLIX - B4</div>
-        <div class="menu">
-            <a href="#trailers">Lihat Trailer</a>
-            <a href="#logout">Logout</a>
+{% extends 'base.html' %}
+
+{% block meta %}
+<style>
+body {
+    font-family: Arial, sans-serif;
+    background-color: #191919;
+    color: white;
+    margin: 0;
+    padding: 0;
+}
+
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+    background-color: #000000;
+}
+
+.navbar .logo {
+    font-size: 24px;
+    font-weight: bold;
+    color: #E50914;
+}
+
+.navbar .menu a {
+    color: white;
+    text-decoration: none;
+    margin-left: 20px;
+}
+
+.content {
+    padding: 20px;
+    text-align: left;
+}
+
+.section h1, .section h2 {
+    color: white;
+    padding: 10px;
+}
+
+.package-info, .payment-method {
+    background-color: #222;
+    padding: 15px;
+    margin-top: 20px;
+}
+
+.package-info p, .payment-method select {
+    margin: 10px 0;
+    background-color: #333;
+    padding: 8px;
+    width: 100%;
+}
+
+select {
+    color: white;
+    background-color: #333;
+    border: 1px solid #444;
+    padding: 8px;
+    width: 100%;
+}
+
+button {
+    padding: 10px;
+    background-color: #E50914;
+    border: none;
+    color: white;
+    cursor: pointer;
+    width: 100%;
+    margin-top: 10px;
+}
+</style>
+{% endblock meta %}
+
+{% block content %}
+<div class="navbar">
+    <div class="logo">PACILFLIX - B4</div>
+    <div class="menu">
+        <a href="#trailers">Lihat Trailer</a>
+        <a href="#logout">Logout</a>
+    </div>
+</div>
+<div class="content">
+    <div class="section">
+        <h1 style="text-align: center;">Pembelian Paket</h1>
+        <div class="package-info">
+            <h2>Informasi Paket yang Ingin Dibeli :</h2>
+            <p>Nama Paket : <b>{{ paket.nama }}</b></p>
+            <p>Harga (IDR) : <b>{{ paket.harga }}</b></p>
+            <p>Resolusi : <b>{{ paket.resolusi_layar }}</b></p>
+            <p>Dukungan Perangkat : <b>{{ paket.dukungan_perangkat }}</b></p>
+        </div>
+        <div class="payment-method">
+            <h2>Pilih Metode Pembayaran :</h2>
+            <select id="paymentMethod" onchange="updatePaymentMethod()">
+                <option value="bank_transfer">Transfer Bank</option>
+                <option value="credit_card">Credit Card</option>
+                <option value="e_wallet">E-Wallet</option>
+            </select>
+            <button onclick="confirmPurchase()">Bayar</button>
         </div>
     </div>
-    <div class="content">
-        <div class="section">
-            <h1 style="text-align: center;">Pembelian Paket</h1>
-            <div class="package-info">
-                <h2>Informasi Paket yang Ingin Dibeli :</h2>
-                <p>Nama Paket : <b>Premium</b></p>
-                <p>Harga : <b>IDR 150,000</b></p>
-                <p>Resolusi : <b>4K Ultra HD</b></p>
-                <p>Dukungan Perangkat : <b>All Devices</b></p>
-            </div>
-            <div class="payment-method">
-                <h2>Pilih Metode Pembayaran :</h2>
-                <select id="paymentMethod">
-                    <option value="bank_transfer">Transfer Bank</option>
-                    <option value="credit_card">Credit Card</option>
-                    <option value="e_wallet">E-Wallet</option>
-                </select>
-                <button onclick="confirmPurchase()">Bayar</button>
-            </div>
-        </div>
-    </div>
-    <script>
-        function confirmPurchase() {
-            // Implementasi fungsi pembayaran bisa di sini
-            alert('Pembelian berhasil!');
-        }
-    </script>
-</body>
-</html>
+</div>
+
+<script>
+function updatePaymentMethod() {
+    const selectedMethod = document.getElementById('paymentMethod').value;
+    document.getElementById('dropdownMenuButton').textContent = selectedMethod;
+}
+
+function confirmPurchase() {
+    const paymentMethodElement = document.getElementById('paymentMethod');
+    const selectedValue = paymentMethodElement.value;
+    const paymentMethodMapping = {
+        'bank_transfer': 'Transfer Bank',
+        'credit_card': 'Credit Card',
+        'e_wallet': 'E-Wallet'
+    };
+    const selectedMethod = paymentMethodMapping[selectedValue];
+    const url = `{% url 'langganan:beli' paket.nama 'selectedMethod' %}`.replace('selectedMethod', 
+        encodeURIComponent(selectedMethod));
+    window.location.href = url;
+}
+
+</script>
+{% endblock content %}

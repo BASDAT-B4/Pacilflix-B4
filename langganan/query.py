@@ -21,7 +21,7 @@ class SubscriptionManager:
         ORDER BY p.harga DESC;
         """
 
-    def retrieve_transaction_history():
+    def get_transaction_history():
         # username = request.user.username
         return f"""
         SELECT p.nama, t.start_date_time, t.end_date_time, t.metode_pembayaran, t.timestamp_pembayaran, p.harga AS total_pembayaran
@@ -35,5 +35,5 @@ class SubscriptionManager:
     def purchase_package(nama_paket, metode_pembayaran):
         return f"""
         INSERT INTO pacilflix.TRANSACTION (username, start_date_time, end_date_time, nama_paket, metode_pembayaran, timestamp_pembayaran)
-        VALUES ('sdavis', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP + INTERVAL '1 month', '{nama_paket}', '{metode_pembayaran}', CURRENT_TIMESTAMP);
+        VALUES ('christopher34', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP + INTERVAL '1 month', '{nama_paket}', '{metode_pembayaran}', CURRENT_TIMESTAMP);
         """

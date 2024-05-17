@@ -127,7 +127,11 @@ button {
                     <td>{{ paket.harga }}</td>
                     <td>{{ paket.resolusi_layar }}</td>
                     <td>{{ paket.dukungan_perangkat }}</td>
-                    <td style="text-align: center;"><button>Beli</button></td>
+                    <td style="text-align: center;">
+                        <button class="btn-beli" data-nama-paket="{{ paket.nama }}" 
+                            data-param="Transfer Bank"
+                        >Beli</button>
+                    </td>
                 </tr>
                 {% endfor %}
             </tbody>
@@ -161,4 +165,16 @@ button {
         </table>
     </div>
 </div>
+
+<script>
+    document.querySelectorAll('.btn-beli').forEach(button => {
+        button.addEventListener('click', function() {
+            const namaPaket = this.getAttribute('data-nama-paket');
+            const param = this.getAttribute('data-param');
+            const url = `{% url 'langganan:beli_paket' 'namaPaket' 'param' %}`.replace('namaPaket', 
+                encodeURIComponent(namaPaket)).replace('param', encodeURIComponent(param));
+            window.location.href = url;
+        });
+    });
+</script>
 {% endblock content %}
