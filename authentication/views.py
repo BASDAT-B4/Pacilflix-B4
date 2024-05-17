@@ -55,7 +55,6 @@ def login_user(cursor: CursorWrapper, request):
         username = request.POST.get('username')
         password = request.POST.get('password')
 
-        # Use the method from AuthenticationManager to get the SQL query
         cursor.execute(AuthenticationManager.check_user(), [username, password])
         users = cursor.fetchall()
 
