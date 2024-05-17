@@ -11,23 +11,39 @@ body {
 }
 
 .navbar {
+    width: 100%;
     display: flex;
     justify-content: space-between;
     align-items: center;
     padding: 10px 20px;
-    background-color: #000000;
+    background-color: black;
 }
-
-.navbar .logo {
+.nav-logo {
+    color: red;
     font-size: 24px;
-    font-weight: bold;
-    color: #E50914;
 }
-
-.navbar .menu a {
+.nav-links {
+    display: flex;
+    align-items: center;
+}
+.nav-text {
     color: white;
-    text-decoration: none;
     margin-left: 20px;
+}
+.logout-button {
+    color: white;
+    background-color: red;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    text-decoration: none;
+    border-radius: 24px;
+    margin-left: 20px;
+}
+.nav-container {
+    display: flex;
+    align-items: center;
+    padding-right: 20px;
 }
 
 .content {
@@ -74,13 +90,19 @@ button {
 {% endblock meta %}
 
 {% block content %}
-<div class="navbar">
-    <div class="logo">PACILFLIX - B4</div>
-    <div class="menu">
-        <a href="#trailers">Lihat Trailer</a>
-        <a href="#logout">Logout</a>
+<nav class="navbar">
+    <div class="nav-logo">PACILFLIX - B4</div>
+    <div class="nav-container">
+        <div class="nav-links">
+            <div class="nav-text"><a>Daftar Tayangan</a></div>
+            <div class="nav-text"><a href="{% url 'daftar_kontributor:daftar_kontributor' %}">Daftar Kontributor</a></div>
+            <div class="nav-text"><a>Kelola Daftar Favorit</a></div>
+            <div class="nav-text"><a>Kelola Daftar Unduhan</a></div>
+            <div class="nav-text"><a>Kelola Langganan</a></div>
+        </div>
+        <a href="{% url 'authentication:logout' %}" class="logout-button">Logout</a>
     </div>
-</div>
+</nav>
 <div class="content">
     <div class="section">
         <h1 style="text-align: center;">Pembelian Paket</h1>

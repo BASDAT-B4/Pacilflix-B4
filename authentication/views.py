@@ -71,7 +71,7 @@ def login_user(cursor: CursorWrapper, request):
 
 def logout_user(request):
     logout(request)
-    return redirect('authentication:login')
+    return redirect('authentication:show_main')
 
 
 def home(request):
