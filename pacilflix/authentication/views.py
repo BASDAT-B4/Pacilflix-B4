@@ -1,11 +1,9 @@
 from django.shortcuts import render
 from django.shortcuts import redirect
-from django.contrib.auth.forms import UserCreationForm
 from django.contrib import messages  
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.db import connection
-from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render
 from django.db.backends.utils import CursorWrapper
 from .queries import AuthenticationManager
@@ -57,7 +55,6 @@ def login_user(cursor: CursorWrapper, request):
         username = request.POST.get('username')
         password = request.POST.get('password')
 
-        # Use the method from AuthenticationManager to get the SQL query
         cursor.execute(AuthenticationManager.check_user(), [username, password])
         users = cursor.fetchall()
 
@@ -73,7 +70,7 @@ def login_user(cursor: CursorWrapper, request):
 
 def logout_user(request):
     logout(request)
-    return redirect('authentication:login_user')
+    return redirect('authentication:show_main')
 
 
 def home(request):

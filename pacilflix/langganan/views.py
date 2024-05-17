@@ -11,7 +11,7 @@ def show_cru_langganan(request):
 
     cursor1.execute(SubscriptionManager.get_active_package())
     cursor2.execute(SubscriptionManager.get_all_packages())
-    cursor3.execute(SubscriptionManager.retrieve_transaction_history())
+    cursor3.execute(SubscriptionManager.get_transaction_history())
 
     context = {
         'paket_langganan_aktif': EncodeHelper.toSQL(cursor1), 
@@ -27,10 +27,11 @@ def show_payment_confirmation(request, nama_paket, param='Transfer Bank'):
     daftar_paket = EncodeHelper.toSQL(cursor)
 
     paket = [paket for paket in daftar_paket if paket['nama'] == nama_paket]
+    print(paket[0])
 
     return render(request, "beli_paket.html", {'paket': paket[0], 'param': param})
 
 def purchase_package(request, nama_paket, metode_pembayaran):
     cursor = connection.cursor()
     cursor.execute(SubscriptionManager.purchase_package(nama_paket, metode_pembayaran))
-    return redirect('kelola_langganan:langganan')
+    return redirect('langganan:kelola_langganan')

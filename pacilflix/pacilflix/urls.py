@@ -24,4 +24,5 @@ urlpatterns = [
     path('langganan/', include('langganan.urls')),
     path('daftar_favorit/', include('daftar_favorit.urls')),
     path('daftar_unduhan/', include('daftar_unduhan.urls')),
+   
 ]

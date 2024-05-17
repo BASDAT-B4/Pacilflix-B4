@@ -1,7 +1,7 @@
 from django.urls import path
 from langganan.views import *
 
-app_name = 'kelola_langganan'
+app_name = 'langganan'
 
 urlpatterns = [
     path('kelola_langganan/', show_cru_langganan, name='kelola_langganan'),

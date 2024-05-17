@@ -20,7 +20,7 @@ def connectdb(func):
 
 @connectdb
 def show_daftar_favorit(request):
-    username = "mitchellemily"
+    username = "melissa31"
     daftar_favorit = get_daftar_favorit(username)
 
     # daftar_favorit = get_daftar_favorit()
