@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pacilflix Navbar</title>
+    <style>
+        body {
+            background-color: black;
+            color: white;
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+        .navbar {
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 20px;
+            background-color: black;
+        }
+        .nav-logo {
+            color: red;
+            font-size: 24px;
+        }
+        .nav-links {
+            display: flex;
+            align-items: center;
+        }
+        .nav-text {
+            color: white;
+            margin-left: 20px;
+        }
+        .logout-button {
+            color: white;
+            background-color: red;
+            border: none;
+            padding: 10px 20px;
+            cursor: pointer;
+            text-decoration: none;
+            border-radius: 24px;
+            margin-left: 20px;
+        }
+        .nav-container {
+            display: flex;
+            align-items: center;
+            padding-right: 20px;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-logo">PACILFLIX</div>
+        <div class="nav-container">
+            <div class="nav-links">
+                <div class="nav-text">Daftar Tayangan</div>
+                <div class="nav-text">Daftar Kontributor</div>
+                <div class="nav-text">Kelola Daftar Favorit</div>
+                <div class="nav-text">Kelola Daftar Unduhan</div>
+                <div class="nav-text">Kelola Langganan</div>
+            </div>
+            <a href="{% url 'authentication:logout' %}" class="logout-button">Logout</a>
+        </div>
+    </nav>
+</body>
+</html>
