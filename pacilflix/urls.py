@@ -20,10 +20,6 @@ from django.urls import path, include
 urlpatterns = [
     # path('', include('authentication.urls')),
     path('daftar_kontributor/', include('daftar_kontributor.urls')),
-    path('', include('tayangan.urls')),
-    # path('', include('trailer.urls')),
-
-    # path('trailer/', include('trailer.urls')),
-    # path('trailers/', get_trailers, name='trailers'),
-    
+    path('trailer/', include('trailer.urls')),
+    path('langganan/', include('langganan.urls')),
 ]

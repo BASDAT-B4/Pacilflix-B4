@@ -41,12 +41,10 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    # application goes here:
     'daftar_kontributor',
-    'main',
     'authentication',
     'trailer',
-    'tayangan',
+    'langganan'
 ]
 
 MIDDLEWARE = [
