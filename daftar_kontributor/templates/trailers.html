@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Daftar Trailer Tayangan</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #000;
+            color: #fff;
+        }
+
+        h1, h2 {
+            background-color: #b20710;
+            padding: 20px;
+            color: #fff;
+        }
+
+        form {
+            max-width: 600px;
+            margin: 0 auto;
+            text-align: center;
+            padding: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 10px;
+        }
+
+        input[type="text"] {
+            width: 70%;
+            padding: 10px;
+            border: none;
+            border-radius: 20px;
+            outline: none;
+            margin-bottom: 10px;
+        }
+
+        button[type="submit"] {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 20px;
+            background-color: #b20710; 
+            color: white;
+            cursor: pointer;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        th, td {
+            border: 1px solid #fff;
+            padding: 8px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #333;
+        }
+
+        tr:nth-child(even) {
+            background-color: #333;
+        }
+
+        tr:hover {
+            background-color: #555;
+        }
+
+        a {
+            color: #b20710;
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <h1>Daftar Trailer Tayangan</h1>
+
+    <h2>DAFTAR TAYANGAN</h2>
+
+    <!-- Form Pencarian Tayangan -->
+    <form action="{% url 'daftar_kontributor:search_trailer' %}" method="GET">
+        <label for="search_query">Input Pencarian Tayangan berdasarkan judul:</label><br>
+        <input type="text" id="search_query" name="q" placeholder="Cari tayangan berdasarkan judul...">
+        <button type="submit">Cari</button>
+    </form>
+
+    <!-- Hasil Pencarian atau Top 10, Film, dan Series -->
+    {% if search_results %}
+    <!-- Hasil Pencarian -->
+    <h2>HASIL PENCARIAN</h2>
+    <table>
+        <tr>
+            <th>Judul</th>
+            <th>Sinopsis</th>
+            <th>Trailer</th>
+            <th>URL Trailer</th>
+            <th>Tanggal Rilis</th>
+        </tr>
+        {% for result in search_results %}
+        <tr>
+            <td>{{ result.0 }}</td>
+            <td>{{ result.1 }}</td>
+            <td><a href="{{ result.2 }}">Tonton Trailer</a></td>
+            <td>{{ result.2 }}</td>
+            <td>{{ result.3 }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+    {% else %}
+    <!-- Top 10 Tayangan Terbaik Minggu Ini -->
+    <h2>10 Tayangan Terbaik Minggu ini</h2>
+    <table>
+        <tr>
+            <th>Peringkat</th>
+            <th>Judul</th>
+            <th>Sinopsis</th>
+            <th>Trailer</th>
+            <th>URL Trailer</th>
+            <th>Tanggal Rilis</th>
+            <th>Total View 7 Hari Terakhir</th>
+        </tr>
+        {% for trailer in top_10_trailers %}
+        <tr>
+            <td>{{ trailer.0 }}</td>
+            <td>{{ trailer.1 }}</td>
+            <td>{{ trailer.2 }}</td>
+            <td><a href="{{ trailer.3 }}">Tonton Trailer</a></td>
+            <td>{{ trailer.3 }}</td>
+            <td>{{ trailer.4 }}</td>
+            <td>{{ trailer.5 }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+
+    <!-- Film -->
+    <h2>Film</h2>
+    <table>
+        <tr>
+            <th>Judul</th>
+            <th>Sinopsis</th>
+            <th>Trailer</th>
+            <th>URL Trailer</th>
+            <th>Tanggal Rilis</th>
+        </tr>
+        {% for film in film_list %}
+        <tr>
+            <td>{{ film.0 }}</td>
+            <td>{{ film.1 }}</td>
+            <td><a href="{{ film.2 }}">Tonton Trailer</a></td>
+            <td>{{ film.2 }}</td>
+            <td>{{ film.3 }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+
+    <!-- Series -->
+    <h2>Series</h2>
+    <table>
+        <tr>
+            <th>Judul</th>
+            <th>Sinopsis</th>
+            <th>Trailer</th>
+            <th>URL Trailer</th>
+            <th>Tanggal Rilis</th>
+        </tr>
+        {% for series in series_list %}
+        <tr>
+            <td>{{ series.0 }}</td>
+            <td>{{ series.1 }}</td>
+            <td><a href="{{ series.2 }}">Tonton Trailer</a></td>
+            <td>{{ series.2 }}</td>
+            <td>{{ series.3 }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+    {% endif %}
+</body>
+</html>

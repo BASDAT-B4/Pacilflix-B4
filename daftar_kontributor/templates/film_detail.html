@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ film.judul }}</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #000;
+            color: #fff;
+        }
+
+        h1 {
+            background-color: #b20710;
+            padding: 20px;
+            color: #fff;
+        }
+
+        p {
+            margin: 10px 0;
+        }
+
+        a {
+            color: #b20710;
+        }
+
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        ul li {
+            margin-bottom: 5px;
+        }
+    </style>
+</head>
+<body>
+    <h1>{{ film.judul }}</h1>
+    <p>{{ film.sinopsis }}</p>
+    <p>Release Date: {{ film.release_date_film }}</p>
+    <p>Watch the film <a href="{{ film.url_video_film }}">here</a>.</p>
+    <p>Rating Average: {{ film.rating_avg }}</p>
+
+    <h2>Genres</h2>
+    <ul>
+        {% for genre in film.genres %}
+            <li>{{ genre }}</li>
+        {% endfor %}
+    </ul>
+
+    <h2>Players</h2>
+    <ul>
+        {% for player in film.players %}
+            <li>{{ player }}</li>
+        {% endfor %}
+    </ul>
+
+    <h2>Screenwriters</h2>
+    <ul>
+        {% for screenwriter in film.screenwriters %}
+            <li>{{ screenwriter }}</li>
+        {% endfor %}
+    </ul>
+
+    <h2>Director</h2>
+    <p>{{ film.director }}</p>
+</body>
+</html>

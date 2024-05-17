@@ -18,8 +18,12 @@ from django.contrib import admin
 from django.urls import path, include
 
 urlpatterns = [
-    path('', include('authentication.urls')),
+    # path('', include('authentication.urls')),
     path('daftar_kontributor/', include('daftar_kontributor.urls')),
-    path('trailer/', include('trailer.urls')),
+    path('', include('tayangan.urls')),
+    # path('', include('trailer.urls')),
+
+    # path('trailer/', include('trailer.urls')),
+    # path('trailers/', get_trailers, name='trailers'),
     
 ]
