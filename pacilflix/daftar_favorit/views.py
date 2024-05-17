@@ -20,7 +20,7 @@ def connectdb(func):
 
 @connectdb
 def show_daftar_favorit(request):
-    username = "melissa31"
+    username = "mitchellemily"
     daftar_favorit = get_daftar_favorit(username)
 
     # daftar_favorit = get_daftar_favorit()
@@ -34,17 +34,16 @@ def hapus_favorit(request):
         judul = request.POST.get('judul')  # Ambil judul favorit dari POST data
         username = request.POST.get('username')  # Ambil username favorit dari POST data
         timestamp_str = request.POST.get('timestamp')
-        print(judul)
-       
+        print(timestamp_str) 
+    
+        
+        # Hapus entri dari tabel TAYANGAN_MEMILIKI_DAFTAR_FAVORIT yang sesuai dengan judul dan username yang dihapus sebelumnya di tabel DAFTAR_FAVORIT
         with connection.cursor() as cursor:
-            cursor.execute("SELECT id FROM pacilflix.tayangan WHERE judul = %s", [judul])
-            row = cursor.fetchone()
-            id_tayangan = row[0]
-            print("ini id tayangan", id_tayangan)
-            
-        # # Hapus entri dari tabel DAFTAR_FAVORIT
-        # with connection.cursor() as cursor:
-        #     cursor.execute("DELETE FROM pacilflix.daftar_favorit WHERE judul = %s", [judul])
+            cursor.execute("DELETE FROM pacilflix.tayangan_memiliki_daftar_favorit WHERE timestamp = %s AND username = %s", [timestamp_str, username])
+
+        # Hapus entri dari tabel DAFTAR_FAVORIT
+        with connection.cursor() as cursor:
+            cursor.execute("DELETE FROM pacilflix.daftar_favorit WHERE judul = %s", [judul])
 
         return redirect('daftar_favorit:show_daftar_favorit')  # Redirect to the favorites list page
     else:
