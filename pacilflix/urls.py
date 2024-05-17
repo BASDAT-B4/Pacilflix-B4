@@ -21,5 +21,5 @@ urlpatterns = [
     path('', include('authentication.urls')),
     path('daftar_kontributor/', include('daftar_kontributor.urls')),
     path('trailer/', include('trailer.urls')),
-    
+    path('langganan/', include('langganan.urls')),
 ]

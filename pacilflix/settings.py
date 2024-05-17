@@ -42,9 +42,9 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'daftar_kontributor',
-    'main',
     'authentication',
-    'trailer'
+    'trailer',
+    'langganan'
 ]
 
 MIDDLEWARE = [

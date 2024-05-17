@@ -1,7 +1,5 @@
 {% extends 'base.html' %}
 
-{% block title %}PacilFlix - Daftar Kontributor{% endblock %}
-
 {% block meta %}
 <style>
 body {
@@ -13,23 +11,39 @@ body {
 }
 
 .navbar {
+    width: 100%;
     display: flex;
     justify-content: space-between;
     align-items: center;
     padding: 10px 20px;
-    background-color: #000000;
+    background-color: black;
 }
-
-.navbar .logo {
+.nav-logo {
+    color: red;
     font-size: 24px;
-    font-weight: bold;
-    color: #E50914;
 }
-
-.navbar .menu a {
+.nav-links {
+    display: flex;
+    align-items: center;
+}
+.nav-text {
     color: white;
-    text-decoration: none;
     margin-left: 20px;
+}
+.logout-button {
+    color: white;
+    background-color: red;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    text-decoration: none;
+    border-radius: 24px;
+    margin-left: 20px;
+}
+.nav-container {
+    display: flex;
+    align-items: center;
+    padding-right: 20px;
 }
 
 .content {
@@ -78,23 +92,30 @@ th {
 {% endblock meta %}
 
 {% block content %}
-<div class="navbar">
-    <div class="logo">PACILFLIX</div>
-    <div class="menu">
-        <a href="#trailers">Lihat Trailer</a>
-        <a href="#logout">Logout</a>
+<nav class="navbar">
+    <div class="nav-logo">PACILFLIX - B4</div>
+    <div class="nav-container">
+        <div class="nav-links">
+            <div class="nav-text"><a>Daftar Tayangan</a></div>
+            <div class="nav-text"><a href="{% url 'daftar_kontributor:daftar_kontributor' %}">Daftar Kontributor</a></div>
+            <div class="nav-text"><a>Kelola Daftar Favorit</a></div>
+            <div class="nav-text"><a>Kelola Daftar Unduhan</a></div>
+            <div class="nav-text"><a>Kelola Langganan</a></div>
+        </div>
+        <a href="{% url 'authentication:logout' %}" class="logout-button">Logout</a>
     </div>
-</div>
+</nav>
 <div class="content">
     <h1>Daftar Kontributor</h1>
     <div class="filter">
         <label for="contributorType">Filter by type:</label>
         <select id="contributorType">
-            <option value="all">All</option>
-            <option value="director">Penulis Skenario</option>
-            <option value="actor">Pemain</option>
-            <option value="writer">Sutradara</option>
+            <option value="all" {% if param == 'all' %}selected{% endif %}>All</option>
+            <option value="penulis skenario" {% if param == 'penulis skenario' %}selected{% endif %}>Penulis Skenario</option>
+            <option value="pemain" {% if param == 'pemain' %}selected{% endif %}>Pemain</option>
+            <option value="sutradara" {% if param == 'sutradara' %}selected{% endif %}>Sutradara</option>
         </select>
+        
     </div>
     <table class="contributors">
         <thead>
@@ -116,6 +137,12 @@ th {
             {% endfor %}
         </tbody>
     </table>
-    <a href="{% url 'list_kontributor:random' %}">Tes Random</a>
 </div>
+
+<script>
+    document.getElementById('contributorType').addEventListener('change', function() {
+        var tipe = this.value;
+        window.location.href = "{% url 'daftar_kontributor:daftar_kontributor_filtered' 'tipe' %}".replace('tipe', tipe);
+    });
+</script>
 {% endblock content %}

@@ -60,7 +60,7 @@ def login_user(cursor: CursorWrapper, request):
 
         if users:
             request.session['username'] = username
-            response = redirect('authentication:home')  
+            response = redirect('langganan:kelola_langganan')
             response.set_cookie('last_login', str(datetime.datetime.now()))
             return response
         else:
