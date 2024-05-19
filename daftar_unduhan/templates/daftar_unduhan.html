@@ -198,17 +198,16 @@ th {
                 <td>{{ unduhan.timestamp }}</td>
                 <td>
                     {% if unduhan.kurang_dari_1_hari %}
-                    <span class="action-button red disabled" onclick="showAlert('{{ unduhan.id }}')">Hapus</span>
+                        <button class="action-button red disabled" onclick="showAlert('{{ unduhan.id }}')">Hapus</button>
                     {% else %}
-                    <form id="hapus_form_{{ unduhan.id }}" action="{% url 'daftar_unduhan:hapus_unduhan' %}" method="post">
-                        {% csrf_token %}
-                        <input type="hidden" name="judul" value="{{ unduhan.judul }}">
-                        <input type="hidden" name="timestamp" value="{{ unduhan.timestamp }}">
-                        <input type="hidden" name="username" value="{{ unduhan.username }}">
-                        <input type="hidden" name="id_tayangan" value="{{ unduhan.id_tayangan }}">
-                                       
-                        <button class="action-button red" type="submit">Hapus</button>
-                    </form>
+                        <form id="hapus_form_{{ unduhan.id }}" action="{% url 'daftar_unduhan:hapus_unduhan' %}" method="post">
+                            {% csrf_token %}
+                            <input type="hidden" name="judul" value="{{ unduhan.judul }}">
+                            <input type="hidden" name="timestamp" value="{{ unduhan.timestamp }}">
+                            <input type="hidden" name="username" value="{{ unduhan.username }}">
+                            <input type="hidden" name="id_tayangan" value="{{ unduhan.id_tayangan }}">
+                            <button class="action-button red" type="submit">Hapus</button>
+                        </form>
                     {% endif %}
                 </td>
                 
@@ -217,6 +216,11 @@ th {
         </tbody>
     </table>
 </div>
+<script>
+    function showAlert(unduhanId) {
+        alert("Tayangan minimal harus berada di daftar unduhan selama 1 hari agar bisa dihapus");
+    }
+</script>
 
 {% endblock content %}
 
