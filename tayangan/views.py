@@ -669,8 +669,7 @@ def add_review(request, tayangan_type, tayangan_id):
             return redirect(reverse(f'tayangan:{tayangan_type}_detail', kwargs={f'{tayangan_type}_id': tayangan_id}))
         
         url = f"""INSERT INTO pacilflix.ulasan (id_tayangan, username, deskripsi, rating, timestamp)
-                  VALUES ('{tayangan_id}', '{request.COOKIES.get('username')}', '{deskripsi}', '{rating}', NOW())""" 
-        
+                  VALUES ('{tayangan_id}', '{request.session.get('username')}', '{deskripsi}', '{rating}', NOW())""" 
         try:
             # Simpan ulasan ke database
             with connection.cursor() as cursor:

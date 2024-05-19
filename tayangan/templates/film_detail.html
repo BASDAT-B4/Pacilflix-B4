@@ -1,8 +1,7 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>{{ film.judul }}</title>
+{% extends 'base.html' %}
+
+{% block meta %}
+{% include 'navbar_user.html' %}
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -35,8 +34,9 @@
             margin-bottom: 5px;
         }
     </style>
-</head>
-<body>
+    {% endblock meta %}
+
+    {% block content %}
     <h1>{{ film.judul }}</h1>
     <p>{{ film.sinopsis }}</p>
     <p>Release Date: {{ film.release_date_film }}</p>
@@ -107,7 +107,7 @@
     
         <button class="button" type="submit">Submit</button>
     </form>
+    {% endblock content %}
     
     
-</body>
-</html>
+

@@ -1,9 +1,7 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Daftar Tayangan</title>
+{% extends 'base.html' %}
+
+{% block meta %}
+{% include 'navbar_user.html' %}
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -86,8 +84,9 @@
             background-color: #800106;
         }
     </style>
-</head>
-<body>
+{% endblock meta %}
+
+{% block content %}
     <header>
         <h1>Daftar Tayangan</h1>
     </header>
@@ -181,5 +180,5 @@
             {% endfor %}
         </table>
     </div>
-</body>
-</html>
+
+{% endblock content %}

@@ -1,9 +1,7 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{{ series.judul }}</title>
+{% extends 'base.html' %}
+
+{% block meta %}
+{% include 'navbar_user.html' %}
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -49,8 +47,9 @@
             margin-bottom: 5px;
         }
     </style>
-</head>
-<body>
+{% endblock meta %}
+
+{% block content %}
     <div class="container">
         <h1>{{ series.judul }}</h1>
         <p>{{ series.sinopsis }}</p>
@@ -143,8 +142,4 @@
 
     <button class="button" type="submit">Submit</button>
 </form>
-
-
-   
-</body>
-</html>
+{% endblock content %}

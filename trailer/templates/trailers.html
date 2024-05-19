@@ -1,9 +1,7 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Daftar Trailer Tayangan</title>
+{% extends 'base.html' %}
+
+{% block meta %}
+{% include 'navbar_guest.html' %}
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -82,8 +80,10 @@
             text-decoration: underline;
         }
     </style>
-</head>
-<body>
+{% endblock meta %}
+
+{% block content %}
+
     <h1>Daftar Trailer Tayangan</h1>
 
     <h2>DAFTAR TAYANGAN</h2>
@@ -185,5 +185,4 @@
         {% endfor %}
     </table>
     {% endif %}
-</body>
-</html>
+{% endblock content %}

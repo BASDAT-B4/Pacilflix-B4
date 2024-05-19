@@ -6,5 +6,6 @@ app_name = 'trailer'
 urlpatterns = [
     path('trailers/', get_trailers, name='trailers'),
     # path('search/', search_trailer, name='search_trailer'),  # Path untuk hasil pencarian
-    path('search/', search_trailer, name='search_trailer'), 
+    path('search/', search_trailer, name='search_trailer'),
+    path('trailer_home/', trailer_home, name = 'trailer_home')
 ]

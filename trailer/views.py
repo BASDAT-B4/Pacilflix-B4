@@ -18,8 +18,9 @@ from django.http import HttpResponse
 from django.shortcuts import render, redirect
 from django.urls import reverse
 from django.utils import timezone
-# # def trailer_home(request):
-# #     return render(request, "trailer_home.html")
+
+def trailer_home(request):
+    return render(request, "trailer_home.html")
 
 # def connectdb(func):
 #     @wraps(func)
