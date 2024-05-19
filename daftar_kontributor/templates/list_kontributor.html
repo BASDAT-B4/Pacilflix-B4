@@ -3,7 +3,7 @@
 {% block meta %}
 <style>
 body {
-      {% comment %} navbar {% endcomment %}
+      /* {% comment %} navbar {% endcomment %} */
       body {
         background-color: black;
         color: white;
@@ -46,7 +46,7 @@ body {
         border-radius: 24px;
         margin-left: 20px;
     }
-      {% comment %} navbar {% endcomment %}
+      /* {% comment %} navbar {% endcomment %} */
       
     font-family: Arial, sans-serif;
     background-color: #191919;
@@ -141,11 +141,12 @@ th {
     <div class="nav-logo">PACILFLIX - B4</div>
     <div class="nav-container">
         <div class="nav-links">
-            <a href="#">Daftar Tayangan</a>
-            <a href="">Daftar Kontributor</a>
-            <a href="{% url 'daftar_favorit:show_daftar_favorit' %}">Kelola Daftar Favorit</a>
-            <a href="{% url 'daftar_unduhan:show_daftar_unduhan' %}">Kelola Daftar Unduhan</a>
-            <a href="#">Kelola Langganan</a>
+            <div class="nav-text"><a>Daftar Tayangan</a></div>
+            <div class="nav-text"><a href="{% url 'tayangan:shows' %}">Daftar Tayangan</a></div>
+            <div class="nav-text"><a href="{% url 'daftar_kontributor:daftar_kontributor' %}">Daftar Kontributor</a></div>
+            <div class="nav-text"><a href="{% url 'daftar_favorit:show_daftar_favorit' %}">Kelola Daftar Favorit</a></div>
+            <div class="nav-text"><a href="{% url 'daftar_unduhan:show_daftar_unduhan' %}">Kelola Daftar Unduhan</a></div>
+            <div class="nav-text"><a href="{% url 'langganan:kelola_langganan' %}">Kelola Langganan</a></div>
         </div>
         <a href="{% url 'authentication:logout' %}" class="logout-button">Logout</a>
     </div>

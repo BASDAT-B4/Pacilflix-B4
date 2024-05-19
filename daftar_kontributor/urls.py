@@ -1,5 +1,6 @@
 from django.urls import path
 from daftar_kontributor.views import *
+# from .views import check_trailer, show_daftar_kontributor, random
 
 app_name = 'daftar_kontributor'
 

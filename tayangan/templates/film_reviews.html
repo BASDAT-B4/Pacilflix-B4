@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Ulasan untuk {{ film.judul }}</title>
+</head>
+<body>
+    <h1>Ulasan untuk {{ film.judul }}</h1>
+    <p>{{ film.sinopsis }}</p>
+
+    <h2>Tambah Ulasan</h2>
+    <form action="{% url 'add_review' film.id %}" method="POST">
+        {% csrf_token %}
+        <label for="deskripsi">Deskripsi:</label>
+        <textarea name="deskripsi" id="deskripsi" required></textarea>
+        <br>
+        <label for="rating">Rating:</label>
+        <input type="number" name="rating" id="rating" min="0" max="5" required>
+        <br>
+        <button type="submit">Submit</button>
+    </form>
+
+    <h2>Daftar Ulasan</h2>
+    {% for review in film.reviews %}
+        <div>
+            <strong>{{ review.username }}</strong>
+            <p>{{ review.deskripsi }}</p>
+            <p>Rating: {{ review.rating }}</p>
+            <p>Waktu: {{ review.timestamp }}</p>
+        </div>
+        <hr>
+    {% endfor %}
+
+    <a href="{% url 'film_detail' film.id %}">Kembali ke Detail Film</a>
+</body>
+</html>

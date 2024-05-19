@@ -9,9 +9,9 @@ def show_cru_langganan(request):
     cursor2 = connection.cursor()
     cursor3 = connection.cursor()
 
-    cursor1.execute(SubscriptionManager.get_active_package())
+    cursor1.execute(SubscriptionManager.get_active_package(request))
     cursor2.execute(SubscriptionManager.get_all_packages())
-    cursor3.execute(SubscriptionManager.get_transaction_history())
+    cursor3.execute(SubscriptionManager.get_transaction_history(request))
 
     context = {
         'paket_langganan_aktif': EncodeHelper.toSQL(cursor1), 

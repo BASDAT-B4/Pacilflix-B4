@@ -1,0 +1,145 @@
+{% extends 'base.html' %}
+
+{% block meta %}
+{% include 'navbar_user.html' %}
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #000;
+            color: #fff;
+        }
+
+        h1, h2, p {
+            color: #fff;
+        }
+
+        h1 {
+            background-color: #b20710;
+            padding: 20px;
+        }
+
+        .container {
+            margin: 20px;
+        }
+
+        .button {
+            background-color: #b20710;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-right: 10px;
+        }
+
+        .button:hover {
+            background-color: #800106;
+        }
+
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        ul li {
+            margin-bottom: 5px;
+        }
+    </style>
+{% endblock meta %}
+
+{% block content %}
+    <div class="container">
+        <h1>{{ series.judul }}</h1>
+        <p>{{ series.sinopsis }}</p>
+        <!-- <p>Total Episode: {{ series.total_episode }}</p> -->
+        <h2>Episode: {{ episode.id_series }}</h2>
+       
+
+        <ul>
+            {% for episode in series.episodes %}
+            <li><a href="/tayangan/series/{{ episode.id_series }}/episode/{{ episode.sub_judul }}">{{ episode.sub_judul }}</a></li>
+            {% endfor %}
+        </ul>
+        
+        <!-- Tombol Unduh Tayangan -->
+        <button class="button" onclick="downloadSeries('{{ series.id }}')">Unduh Tayangan</button>
+        
+        <!-- Tombol Favorit Tayangan -->
+        <button class="button" onclick="addToFavorites('{{ series.id }}')">Favoritkan Tayangan</button>
+
+        <p>Rating Rata-Rata: {{ series.rating_avg }}</p>
+        <p>Sinopsis: {{ series.sinopsis }}</p>
+
+        <h2>Genre:</h2>
+        <ul>
+            {% for genre in series.genres %}
+                <li>{{ genre }}</li>
+            {% endfor %}
+        </ul>
+
+        <p>Asal Negara: {{ series.asal_negara }}</p>
+
+        <h2>Pemain:</h2>
+        <ul>
+            {% for player in series.players %}
+                <li>{{ player }}</li>
+            {% endfor %}
+        </ul>
+
+        <h2>Penulis Skenario:</h2>
+        <ul>
+            {% for screenwriter in series.screenwriters %}
+                <li>{{ screenwriter }}</li>
+            {% endfor %}
+        </ul>
+
+        <h2>Sutradara:</h2>
+        <p>{{ series.director }}</p>
+    </div>
+
+    <script>
+        function downloadSeries(seriesId) {
+            // Implementasi logika untuk mengunduh tayangan
+        }
+
+        function addToFavorites(seriesId) {
+            // Implementasi logika untuk menambahkan ke favorit
+        }
+    </script>
+
+<h2>Ulasan</h2>
+<ul>
+    {% if series.reviews %}
+        {% for review in series.reviews %}
+            <li>
+                <strong>{{ review.0 }}</strong> - {{ review.1 }} - Rating: {{ review.2 }}
+                <br>
+                Timestamp: {{ review.3 }}
+            </li>
+        {% endfor %}
+    {% else %}
+        <li>Tidak ada ulasan untuk series ini.</li>
+    {% endif %}
+</ul>
+
+<!-- Tambah Ulasan -->
+<!-- <h2>Tambah Ulasan</h2> -->
+<h2>Tambah Ulasan</h2>
+<form action="{% url 'tayangan:add_review' 'series' series_id %}" method="post">
+    {% csrf_token %}
+    <label for="deskripsi">Deskripsi Ulasan:</label>
+    <textarea id="deskripsi" name="deskripsi" required></textarea>
+
+    <label for="rating">Rating yang diberikan:</label>
+    <select id="rating" name="rating" required>
+        <option value="" disabled selected>Pilih Rating</option>
+        {% for rating in ratings %}
+            <option value="{{ rating }}">{{ rating }}</option>
+        {% endfor %}
+    </select>
+
+    <button class="button" type="submit">Submit</button>
+</form>
+{% endblock content %}

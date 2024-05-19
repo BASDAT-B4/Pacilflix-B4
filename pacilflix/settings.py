@@ -45,6 +45,9 @@ INSTALLED_APPS = [
     'authentication',
     'trailer',
     'langganan',
+    'tayangan',
+    # 'authentication'
+    # 'ulasan',,
     'daftar_unduhan',
     'daftar_favorit'
 ]
