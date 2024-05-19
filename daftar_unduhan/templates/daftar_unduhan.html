@@ -197,16 +197,21 @@ th {
                 <td>{{ unduhan.judul }}</td>
                 <td>{{ unduhan.timestamp }}</td>
                 <td>
-                    <form action="{% url 'daftar_unduhan:hapus_unduhan' %}" method="post">
+                    {% if unduhan.kurang_dari_1_hari %}
+                    <span class="action-button red disabled" onclick="showAlert('{{ unduhan.id }}')">Hapus</span>
+                    {% else %}
+                    <form id="hapus_form_{{ unduhan.id }}" action="{% url 'daftar_unduhan:hapus_unduhan' %}" method="post">
                         {% csrf_token %}
                         <input type="hidden" name="judul" value="{{ unduhan.judul }}">
                         <input type="hidden" name="timestamp" value="{{ unduhan.timestamp }}">
                         <input type="hidden" name="username" value="{{ unduhan.username }}">
                         <input type="hidden" name="id_tayangan" value="{{ unduhan.id_tayangan }}">
+                                       
                         <button class="action-button red" type="submit">Hapus</button>
                     </form>
-                    
+                    {% endif %}
                 </td>
+                
             </tr>
             {% endfor %}
         </tbody>
@@ -214,5 +219,4 @@ th {
 </div>
 
 {% endblock content %}
-
 

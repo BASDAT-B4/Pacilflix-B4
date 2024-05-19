@@ -11,6 +11,7 @@ from django.db import connection
         
 from django.db import connection
 
+
 def get_daftar_unduhan(username):
     with connection.cursor() as cursor:
         cursor.execute("SELECT t.id_tayangan, t.username, t.timestamp, j.judul FROM pacilflix.tayangan_terunduh AS t JOIN pacilflix.tayangan AS j ON t.id_tayangan = j.id WHERE t.username = %s", [username])
@@ -19,3 +20,6 @@ def get_daftar_unduhan(username):
             dict(zip(columns, row))
             for row in cursor.fetchall()
         ]
+
+
+
