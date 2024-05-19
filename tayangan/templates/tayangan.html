@@ -96,7 +96,7 @@
         <h2>DAFTAR TAYANGAN</h2>
         <!-- Form Pencarian Tayangan -->
         <div class="search-bar">
-            <form action="{% url 'daftar_kontributor:search_trailer' %}" method="GET">
+            <form action="{% url 'tayangan:search_trailer' %}" method="GET">
                 <label for="search_query">Input Pencarian Tayangan berdasarkan judul:</label><br>
                 <input type="text" id="search_query" name="q" placeholder="Cari tayangan berdasarkan judul...">
                 <button type="submit">Cari</button>
@@ -151,7 +151,7 @@
                 <!-- Tambahkan tombol untuk mengarahkan ke halaman tayangan jika ada URL Trailer -->
                 <td>
                     {% if film.3 %}
-                        <a class="watch-button" href="{% url 'daftar_kontributor:film_detail' film_id=film.0 %}">Tombol Halaman Tayangan</a>
+                        <a class="watch-button" href="{% url 'tayangan:film_detail' film_id=film.0 %}">Tombol Halaman Tayangan</a>
                     {% endif %}
                 </td>
             </tr>
@@ -176,7 +176,7 @@
                 <td>{{ series.3 }}</td>
                 <td>{{ series.4 }}</td>
                 <!-- Tambahkan tombol untuk mengarahkan ke halaman tayangan -->
-                <td><a class="watch-button" href="{% url 'daftar_kontributor:series_detail' series_id=series.0 %}">Tombol Halaman Tayangan</a></td>
+                <td><a class="watch-button" href="{% url 'tayangan:series_detail' series_id=series.0 %}">Tombol Halaman Tayangan</a></td>
             </tr>
             {% endfor %}
         </table>

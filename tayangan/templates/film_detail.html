@@ -41,7 +41,13 @@
     <p>{{ film.sinopsis }}</p>
     <p>Release Date: {{ film.release_date_film }}</p>
     <p>Watch the film <a href="{{ film.url_video_film }}">here</a>.</p>
+    <p>Release Date: {{ film.release_date_film }}</p>
+    <!-- {% if film.release_date_film <= now %}
+        <p>Watch the film <a href="{{ film.url_video_film }}">here</a>.</p>
+    {% endif %} -->
+<!-- <p>Rating Average: {{ film.rating_avg }}</p> -->
     <p>Rating Average: {{ film.rating_avg }}</p>
+
 
     <h2>Genres</h2>
     <ul>
@@ -66,5 +72,42 @@
 
     <h2>Director</h2>
     <p>{{ film.director }}</p>
+
+    <!-- Daftar Ulasan -->
+    <h2>Ulasan</h2>
+    <ul>
+        {% if film.reviews %}
+            {% for review in film.reviews %}
+                <li>
+                    <strong>{{ review.0 }}</strong> - {{ review.1 }} - Rating: {{ review.2 }}
+                    <br>
+                    Timestamp: {{ review.3 }}
+                </li>
+            {% endfor %}
+        {% else %}
+            <li>Tidak ada ulasan untuk film ini.</li>
+        {% endif %}
+    </ul>
+
+
+    <!-- <h2>Tambah Ulasan</h2> -->
+    <h2>Tambah Ulasan</h2>
+    <form action="{% url 'tayangan:add_review' 'film' film_id %}" method="post">
+        {% csrf_token %}
+        <label for="deskripsi">Deskripsi Ulasan:</label>
+        <textarea id="deskripsi" name="deskripsi" required></textarea>
+    
+        <label for="rating">Rating yang diberikan:</label>
+        <select id="rating" name="rating" required>
+            <option value="" disabled selected>Pilih Rating</option>
+            {% for rating in ratings %}
+                <option value="{{ rating }}">{{ rating }}</option>
+            {% endfor %}
+        </select>
+    
+        <button class="button" type="submit">Submit</button>
+    </form>
+    
+    
 </body>
 </html>
