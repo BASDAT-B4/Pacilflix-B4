@@ -94,9 +94,9 @@ button {
         <div class="nav-links">
             <div class="nav-text"><a>Daftar Tayangan</a></div>
             <div class="nav-text"><a href="{% url 'daftar_kontributor:daftar_kontributor' %}">Daftar Kontributor</a></div>
-            <div class="nav-text"><a>Kelola Daftar Favorit</a></div>
-            <div class="nav-text"><a>Kelola Daftar Unduhan</a></div>
-            <div class="nav-text"><a>Kelola Langganan</a></div>
+            <div class="nav-text"><a href="{% url 'daftar_favorit:show_daftar_favorit' %}">Kelola Daftar Favorit</a></div>
+            <div class="nav-text"><a href="{% url 'daftar_unduhan:show_daftar_unduhan' %}">Kelola Daftar Unduhan</a></div>
+            <div class="nav-text"><a href="{% url 'langganan:kelola_langganan' %}">Kelola Langganan</a></div>
         </div>
         <a href="{% url 'authentication:logout' %}" class="logout-button">Logout</a>
     </div>
