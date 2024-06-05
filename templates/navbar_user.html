@@ -53,10 +53,10 @@
         <div class="nav-container">
             <div class="nav-links">
                 <a href="{% url 'tayangan:shows' %}"> <div class="nav-text">Daftar Tayangan</div></a>
-                <div class="nav-text">Daftar Kontributor</div>
-                <div class="nav-text">Kelola Daftar Favorit</div>
-                <div class="nav-text">Kelola Daftar Unduhan</div>
-                <div class="nav-text">Kelola Langganan</div>
+                <a href="{% url 'daftar_kontributor:daftar_kontributor' %}"><div class="nav-text">Daftar Kontributor</div></a>
+                <a href="{% url 'daftar_favorit:show_daftar_favorit' %}"><div class="nav-text">Kelola Daftar Favorit</div></a>
+                <a href="{% url 'daftar_unduhan:show_daftar_unduhan' %}"><div class="nav-text">Kelola Daftar Unduhan</div></a>
+                <a href="{% url 'langganan:kelola_langganan' %}"><div class="nav-text">Kelola Langganan</div></a>
             </div>
             <a href="{% url 'authentication:logout' %}" class="logout-button">Logout</a>
         </div>
