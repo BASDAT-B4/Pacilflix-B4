@@ -2,18 +2,26 @@ from django.shortcuts import render
 from functools import wraps
 from daftar_unduhan.query import get_daftar_unduhan
 
+from django.shortcuts import render
+from django.contrib.auth.decorators import login_required
+
 def connectdb(func):
     @wraps(func)
     def wrapper(request, *args, **kwargs):
         return func(request, *args, **kwargs)
     return wrapper
 
+def get_user(request):
+    return request.session.get('username')
 
 @connectdb
+
 def show_daftar_unduhan(request):
-    username = "melissa31"
-    daftar_unduhan = get_daftar_unduhan(username)
+    username = get_user(request)
+    if username is None:
+        return render(request, "error.html", {'message': 'User not logged in'})
     
+    daftar_unduhan = get_daftar_unduhan(username)
     return render(request, "daftar_unduhan.html", {'daftar_unduhan': daftar_unduhan})
 
 

@@ -11,6 +11,9 @@ from datetime import datetime
 
 # Import the function from database.py
 from daftar_favorit.query import *
+from django.shortcuts import render
+from django.contrib.auth.decorators import login_required
+from functools import wraps
 
 def connectdb(func):
     @wraps(func)
@@ -18,15 +21,18 @@ def connectdb(func):
         return func(request, *args, **kwargs)
     return wrapper
 
+def get_user(request):
+    return request.session.get('username')
+
 @connectdb
+
 def show_daftar_favorit(request):
-    username = "melissa31"
+    username = get_user(request)
+    if username is None:
+        return render(request, "error.html", {'message': 'User not logged in'})
+
     daftar_favorit = get_daftar_favorit(username)
-
-    # daftar_favorit = get_daftar_favorit()
-
     return render(request, "daftar_favorit.html", {'daftar_favorit': daftar_favorit})
-
 @require_POST
 
 def hapus_favorit(request):

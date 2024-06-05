@@ -14,6 +14,8 @@ def connectdb(func):
             return func(request, cursor, *args, **kwargs)
     return wrapper
 
+
+
 @connectdb
 def show_daftar_kontributor(request, cursor, tipe='all'):
     if tipe.lower() == 'all':
