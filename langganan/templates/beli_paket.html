@@ -141,8 +141,10 @@ function confirmPurchase() {
         'e_wallet': 'E-Wallet'
     };
     const selectedMethod = paymentMethodMapping[selectedValue];
-    const url = `{% url 'langganan:beli' paket.nama 'selectedMethod' %}`.replace('selectedMethod', 
-        encodeURIComponent(selectedMethod));
+    const namaPaket = '{{ paket.nama }}';
+    const encodedNamaPaket = encodeURIComponent(namaPaket);
+    const encodedMethod = encodeURIComponent(selectedMethod);
+    const url = `/langganan/beli/${encodedNamaPaket}/${encodedMethod}/`;
     window.location.href = url;
 }
 
